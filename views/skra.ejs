@@ -2,6 +2,10 @@
 
 <form method="post" action="/skra">
   <div>
+    <label for="game_date">Date</label>
+    <input type="datetime-local" id="game_date" name="DATE">
+  </div>
+  <div>
     <label for="home_name">Heimalið</label>
     <select id="home_name" name="HOME_ID">
       <% teams.forEach(function(team){ %>
@@ -27,5 +31,9 @@
   </div>
   <button>Skrá</button>
 </form>
-
+<% if (locals.error) { %>
+  <div class="alert alert-danger" role="alert">
+    <%= error %>
+  </div>
+<% } %>
 <a href="/admin">Til baka</a>

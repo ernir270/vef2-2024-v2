@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import express from 'express';
 import passport from 'passport';
 import { insertGame, getGames, getTeams } from '../lib/db.js';
@@ -40,7 +41,8 @@ async function skraRoute(req, res) {
 
   return res.render('skra', {
     title: 'Skrá leik',
-    teams
+    teams,
+    error: null
   });
 }
 
@@ -53,10 +55,29 @@ const logoutRoute = (req, res) => {
   });
 }
 
-function skraRouteInsert(req, res) {
-  // TODO mjög hrátt allt saman, vantar validation!
-  const { HOME_ID, AWAY_ID, HOME_SCORE, AWAY_SCORE } = req.body;
-  insertGame(HOME_ID, HOME_SCORE, AWAY_ID, AWAY_SCORE);
+// eslint-disable-next-line consistent-return
+async function skraRouteInsert(req, res) {
+
+  const teams = await getTeams();
+  const { DATE, HOME_ID, AWAY_ID, HOME_SCORE, AWAY_SCORE } = req.body;
+
+  const currentDate = new Date();
+  const gameDate = new Date(DATE);
+  const dateTwoMonths = new Date();
+  dateTwoMonths.setMonth(dateTwoMonths.getMonth() - 2);
+
+  if(gameDate > currentDate || gameDate < dateTwoMonths){
+    return res.render('skra', {title: 'Skrá leik', teams, error: 'Ólögleg dagsetning, leikur má ekki vera meira en tveggja mánaða gamall eða í framtíðinni' });
+  }
+
+  const homeScore = parseInt(HOME_SCORE, 10);
+  const awayScore = parseInt(AWAY_SCORE, 10);
+
+  if(Number.isNaN(homeScore) || homeScore < 0 || Number.isNaN(awayScore) || awayScore < 0){
+    return res.render('skra', {title: 'Skrá leik', teams, error: 'Ólöglegt skor, verður að vera jákvæð heiltala >= 0' });
+  }
+
+  insertGame(DATE, HOME_ID, HOME_SCORE, AWAY_ID, AWAY_SCORE);
   res.redirect('/admin');
 }
 

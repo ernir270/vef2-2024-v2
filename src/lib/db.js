@@ -101,11 +101,11 @@ export  async function getGames() {
 
 
 
-export function insertGame(HOME_ID, HOME_SCORE, AWAY_ID, AWAY_SCORE) {
+export function insertGame(DATE, HOME_ID, HOME_SCORE, AWAY_ID, AWAY_SCORE) {
   const q =
-    'insert into games (home, away, home_score, away_score) values ($1, $2, $3, $4);';
+    'insert into games (date, home, away, home_score, away_score) values ($1, $2, $3, $4, $5);';
 
-  query(q, [HOME_ID, AWAY_ID, HOME_SCORE, AWAY_SCORE]);
+  query(q, [DATE, HOME_ID, AWAY_ID, HOME_SCORE, AWAY_SCORE]);
 }
 
 export async function getTeams(){
