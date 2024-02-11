@@ -1,6 +1,10 @@
 import pg from 'pg';
+import { readFile } from 'fs/promises';
 import { environment } from './environment.js';
 import { logger } from './logger.js';
+
+const SCHEMA_FILE = './sql/schema.sql';
+const DROP_SCHEMA_FILE = './sql/drop.sql';
 
 const env = environment(process.env, logger);
 
@@ -38,7 +42,24 @@ export async function query(q, values = []) {
   }
 }
 
-export async function getGames() {
+
+
+
+export async function createSchema(schemaFile = SCHEMA_FILE){
+  const data = await readFile(schemaFile);
+  return query(data.toString('utf-8'))
+}
+
+
+export async function dropSchema(schemaFile = DROP_SCHEMA_FILE){
+  const data = await readFile(schemaFile);
+  return query(data.toString('utf-8'))
+}
+
+
+
+
+export  async function getGames() {
   const q = `
     SELECT
       date,
@@ -75,14 +96,19 @@ export async function getGames() {
 
     return games;
   }
+  return games;
 }
 
-export function insertGame(home_name, home_score, away_name, away_score) {
+
+
+export function insertGame(HOME_NAME, HOME_SCORE, AWAY_NAME, AWAY_SCORE) {
   const q =
     'insert into games (home, away, home_score, away_score) values ($1, $2, $3, $4);';
 
-  const result = query(q, [home_name, home_score, away_name, away_score]);
+  query(q, [HOME_NAME, HOME_SCORE, AWAY_NAME, AWAY_SCORE]);
 }
+
+
 
 export async function end() {
   await pool.end();
