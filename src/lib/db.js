@@ -101,11 +101,22 @@ export  async function getGames() {
 
 
 
-export function insertGame(HOME_NAME, HOME_SCORE, AWAY_NAME, AWAY_SCORE) {
+export function insertGame(HOME_ID, HOME_SCORE, AWAY_ID, AWAY_SCORE) {
   const q =
     'insert into games (home, away, home_score, away_score) values ($1, $2, $3, $4);';
 
-  query(q, [HOME_NAME, HOME_SCORE, AWAY_NAME, AWAY_SCORE]);
+  query(q, [HOME_ID, AWAY_ID, HOME_SCORE, AWAY_SCORE]);
+}
+
+export async function getTeams(){
+  const q = 'SELECT id, name FROM teams;';
+  try{
+    const result = await query(q);
+    return result.rows;
+  } catch (e){
+    console.error('Failed to get teams', e)
+    return [];
+  }
 }
 
 

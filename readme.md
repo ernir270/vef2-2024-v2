@@ -1,18 +1,5 @@
 # Vefforritun 2, 2024, verkefni 2: Express, postgres og hýsing
 
-- [Kynning á verkefni](https://youtu.be/OlYfb4N-IZQ)
-- [Byrjun á verkefni í fyrirlestri 4](https://youtu.be/45wAA23x5FA)
-
-## Markmið
-
-- Setja upp express vef með: routes, EJS templateum, formum með staðfestingu og notendaumsjón
-- Setja upp postgres gagnagrunn, vinna með skema og gögn sem til eru og bæta við þau
-- Setja upp verkefni í hýsingu
-
-## Verkefnið
-
-Verkefnið er framhald á [verkefni 1](https://github.com/vefforritun/vef2-2024-v1) og snýst um að setja upp express vef með postgres gagnagrunni fyrir leikna og hýsa verkefnið.
-
 ### Express vefur
 
 Setja skal upp express vef með routes fyrir:
@@ -118,12 +105,6 @@ GitHub Actions er uppsett til að keyra lint og test, þetta skal vera „grænt
 
 Setja skal upp vefinn á Render, Railway eða Heroku (ath að uppsetning á Heroku mun kosta) tengt við GitHub með postgres settu upp.
 
-### Gefin virkni
-
-Gefin er grunnuppsetning á express ásamt virkni í `lib/` möppu. Ekki er krafa um að nota þetta.
-
-Unnið verður áfram í uppsetningu á express og notendaumsjón í fyrirlestri 4, og uppsetningu á gagnagrunni og hýsingu í fyrirlestri 5.
-
 ## Mat
 
 - 20% – Express vefur
@@ -133,10 +114,6 @@ Unnið verður áfram í uppsetningu á express og notendaumsjón í fyrirlestri
 - 10% — Útlit
 - 10% – Tæki, tól og test
 - 10% – GitHub og hýsing
-
-## Sett fyrir
-
-Verkefni sett fyrir í fyrirlestri miðvikudaginn 31. janúar 2023.
 
 ## Skil
 
@@ -150,23 +127,3 @@ Skil skulu innihalda:
   - `polarparsnip`
   - `sturla-freyr`
 
-## Einkunn
-
-Leyfilegt er að ræða, og vinna saman að verkefni en **skrifið ykkar eigin lausn**. Ef tvær eða fleiri lausnir eru mjög líkar þarf að færa rök fyrir því, annars munu allir hlutaðeigandi hugsanlega fá 0 fyrir verkefnið.
-
-Ef stórt mállíkan (LLM, „gervigreind“, t.d. ChatGTP) er notað til að skrifa part af lausn skal taka það fram. [Sjá nánar á upplýsingasíða um gervigreind hjá HÍ](https://gervigreind.hi.is/).
-
-Sett verða fyrir ([sjá nánar í kynningu á áfanga](https://github.com/vefforritun/vef2-2024/blob/main/namsefni/01.kynning/1.kynning.md)):
-
-- fimm minni sem gilda 10% hvert, samtals 50% af lokaeinkunn.
-- tvö hópverkefni þar sem hvort um sig gildir 20%, samtals 40% af lokaeinkunn.
-- einstaklingsverkefni sem gildir 10–20% af lokaeinkunn.
-
----
-
-> Útgáfa 0.2
-
-| Útgáfa | Breyting      |
-| ------ | ------------- |
-| 0.1    | Fyrsta útgáfa |
-| 0.2    | Lengd skil    |

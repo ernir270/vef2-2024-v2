@@ -1,3 +1,31 @@
-html {
-  background-color: #f5f5f5;
+:root {
+  --font-base-size: 16px;
+  --font-base-family: Helvetica, Arial, sans-serif;
+  --max-width: 56rem;
+  --spacing: 1rem;
+  --color-border: #ddd;
 }
+
+html {
+  box-sizing: border-box;
+}
+
+.table {
+  margin-bottom: var(--spacing);
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  overflow-y: auto;
+  width: 50%;
+  margin-left: 400px;
+
+}
+
+table td, th {
+  border: 1px solid var(--color-border);
+  padding: calc(var(--spacing) / 2);
+  text-align: start;
+}
+

@@ -73,3 +73,5 @@ INSERT INTO games (date, home, away, home_score, away_score) values ('2024-01-22
 INSERT INTO games (date, home, away, home_score, away_score) values ('2024-01-22T15:20:53.955Z', 1, 6, 5, 1);
 INSERT INTO games (date, home, away, home_score, away_score) values ('2024-01-22T15:20:53.955Z', 2, 5, 5, 3);
 INSERT INTO games (date, home, away, home_score, away_score) values ('2024-01-22T15:20:53.955Z', 9, 11, 3, 2);
+
+INSERT INTO users (username, password) values ('admin', '$2a$11$pgj3.zySyFOvIQEpD7W6Aund1Tw.BFarXxgLJxLbrzIv/4Nteisii');

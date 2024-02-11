@@ -1,6 +1,6 @@
 import express from 'express';
 import passport from 'passport';
-import { insertGame } from '../lib/db.js';
+import { insertGame, getGames, getTeams } from '../lib/db.js';
 
 export const adminRouter = express.Router();
 
@@ -11,12 +11,14 @@ async function indexRoute(req, res) {
 }
 
 async function adminRoute(req, res) {
+  const games = await getGames();
   const user = req.user ?? null;
   const loggedIn = req.isAuthenticated();
 
   return res.render('admin', {
     title: 'Admin upplýsingar, mjög leynilegt',
     user,
+    games,
     loggedIn,
   });
 }
@@ -32,25 +34,32 @@ function ensureLoggedIn(req, res, next) {
   return res.redirect('/login');
 }
 
-function skraRoute(req, res, next) {
+async function skraRoute(req, res) {
+  const teams = await getTeams();
+
   return res.render('skra', {
     title: 'Skrá leik',
+    teams
   });
 }
 
-function skraRouteInsert(req, res, next) {
+function logoutRoute(req, res) {
+ return res.redirect('/');
+}
+
+function skraRouteInsert(req, res) {
   // TODO mjög hrátt allt saman, vantar validation!
-  const { home_name, home_score, away_name, away_score } = req.body;
-
-  const result = insertGame(home_name, home_score, away_name, away_score);
-
-  res.redirect('/leikir');
+  const { HOME_ID, AWAY_ID, HOME_SCORE, AWAY_SCORE } = req.body;
+  console.log(req.body);
+  insertGame(HOME_ID, HOME_SCORE, AWAY_ID, AWAY_SCORE);
+  res.redirect('/admin');
 }
 
 adminRouter.get('/login', indexRoute);
 adminRouter.get('/admin', ensureLoggedIn, adminRoute);
-adminRouter.get('/skra', skraRoute);
+adminRouter.get('/skra', ensureLoggedIn, skraRoute);
 adminRouter.post('/skra', skraRouteInsert);
+adminRouter.get('/logout', logoutRoute);
 
 adminRouter.post(
   '/login',
