@@ -13,6 +13,7 @@ async function indexRoute(req, res) {
 
 async function leikirRoute(req, res) {
   const games = await getGames();
+  games.sort((a, b) => new Date(b.date) - new Date(a.date));
 
   return res.render('leikir', {
     title: 'Leikir',

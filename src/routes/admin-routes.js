@@ -12,6 +12,8 @@ async function indexRoute(req, res) {
 
 async function adminRoute(req, res) {
   const games = await getGames();
+  games.sort((a, b) => new Date(b.date) - new Date(a.date));
+
   const user = req.user ?? null;
   const loggedIn = req.isAuthenticated();
 
