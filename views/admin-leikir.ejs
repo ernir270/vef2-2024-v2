@@ -1,4 +1,9 @@
-<%- include('header') -%>
+<head>
+  <meta charset="utf-8">
+  <title><%= locals.title ?? '' %></title>
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/script.js"></script>
+</head>
 
 <h1>Seinustu leikir</h1>
 <div class="games"></div>
@@ -23,4 +28,3 @@
       <% } %>
     </table>
 </div>
-

@@ -1,5 +1,6 @@
 import express from 'express';
 import { getGames } from '../lib/db.js';
+import { calculateStandings } from '../lib/score.js';
 
 export const indexRouter = express.Router();
 
@@ -21,8 +22,14 @@ async function leikirRoute(req, res) {
 }
 
 async function stadaRoute(req, res) {
+  const games = await getGames();
+  const standings = await calculateStandings(games);
+  const standingsArray=Object.entries(standings).map(([team, points]) => ({ team, points }));
+  standingsArray.sort((a,b) => b.points - a.points);
+
   return res.render('stada', {
     title: 'Staðan',
+    standingsArray,
   });
 }
 

@@ -1,5 +1,7 @@
-Velkomin á umsjónarsíðu boltadeildarinnar!
-<a href="/skra"><li> Skrá leik </li></a>
-<a href="/logout"><li>Skrá út</li></a>
+<h1>Velkomin á umsjónarsíðu boltadeildarinnar!</h1>
+<a href="/skra">Skrá leik</a>
+<form action="/logout" method="post">
+  <button type="submit">Skrá út</button>
+</form>
 
-<%- include('leikir') -%>
+<%- include('admin-leikir') -%>

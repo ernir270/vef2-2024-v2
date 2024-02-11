@@ -16,7 +16,6 @@ async function adminRoute(req, res) {
   const loggedIn = req.isAuthenticated();
 
   return res.render('admin', {
-    title: 'Admin upplýsingar, mjög leynilegt',
     user,
     games,
     loggedIn,
@@ -43,14 +42,18 @@ async function skraRoute(req, res) {
   });
 }
 
-function logoutRoute(req, res) {
- return res.redirect('/');
+const logoutRoute = (req, res) => {
+  req.logout((err) => {
+    if(err){
+      console.error(err);
+    }
+    return res.redirect('/');
+  });
 }
 
 function skraRouteInsert(req, res) {
   // TODO mjög hrátt allt saman, vantar validation!
   const { HOME_ID, AWAY_ID, HOME_SCORE, AWAY_SCORE } = req.body;
-  console.log(req.body);
   insertGame(HOME_ID, HOME_SCORE, AWAY_ID, AWAY_SCORE);
   res.redirect('/admin');
 }
@@ -59,18 +62,14 @@ adminRouter.get('/login', indexRoute);
 adminRouter.get('/admin', ensureLoggedIn, adminRoute);
 adminRouter.get('/skra', ensureLoggedIn, skraRoute);
 adminRouter.post('/skra', skraRouteInsert);
-adminRouter.get('/logout', logoutRoute);
+adminRouter.post('/logout', logoutRoute);
 
 adminRouter.post(
   '/login',
-
-  // Þetta notar strat að ofan til að skrá notanda inn
   passport.authenticate('local', {
     failureMessage: 'Notandanafn eða lykilorð vitlaust.',
     failureRedirect: '/login',
   }),
-
-  // Ef við komumst hingað var notandi skráður inn, senda á /admin
   (req, res) => {
     res.redirect('/admin');
   },

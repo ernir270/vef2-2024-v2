@@ -1,5 +1,24 @@
 <%- include('header') -%>
 
-<h1>Staðan í deildinni</h1>
+<div class="standings"></div>
+  <h1>Staðan í deildinni</h1>
+  <div class="table">
+    <table>
+        <thead>
+          <tr>
+            <th>Lið</th>
+            <th>Stig</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (const team of locals.standingsArray) { %>
+            <tr>
+              <td><%= team.team %></td>
+              <td><%= team.points %></td>
+            </tr>
+          <% } %>
+        </tbody>
+    </table>
+  </div>
+</div>
 
-<%- include('footer') -%>
